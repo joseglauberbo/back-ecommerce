@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
   res.json({ message: "welcome" });
 });
 require("./app/routes/user.routes")(app);
+require("./app/routes/product.routes")(app);
 
 //server
 const PORT = process.env.PORT || 8080;
