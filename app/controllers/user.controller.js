@@ -19,6 +19,7 @@ exports.create = (req, res) => {
 
   User.create(user)
     .then(data => {
+      let cart = sistemaInterface.creatCart();
       res.send(data);
     })
     .catch(err => {
@@ -85,7 +86,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  
+
   const id = req.params.id;
 
   User.destroy({
