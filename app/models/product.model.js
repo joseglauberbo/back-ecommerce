@@ -1,17 +1,19 @@
-module.exports = (sequelize, Sequelize) => {
-  const Product = sequelize.define("products", {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    name: {
-      type: Sequelize.STRING
-    },
-    price: {
-      type: Sequelize.DOUBLE
-    },
-  });
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-  return Product;
-};
+var ProductSchema = new Schema({
+
+  id: {
+    type: Number
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+});
+
+module.exports = mongoose.model('Product', ProductSchema);
