@@ -6,11 +6,11 @@ var ShopSchema = new Schema({
   id: {
     type: Number
   },
-  listOfProducts: {
+  products: {
     type: [
       {
-        type: Schema.Types.Array,
-        ref: 'listOfProducts'
+        type: Schema.Types.ObjectId,
+        ref: 'Product'
       }
     ],
     default: []

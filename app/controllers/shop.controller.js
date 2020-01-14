@@ -1,4 +1,5 @@
 var Shop = require('../models/shop.model');
+var Product = require('../models/product.model');
 
 exports.showShop = (req, res) => {
   Shop.findById(req.params.id)
@@ -42,3 +43,38 @@ exports.deleteShop = (req, res) => {
       res.status(400).send(error);
     })
 };
+
+exports.addProductToShop = (req, res) => {
+
+  let product = new Product(req.body);
+
+  product.save((err, product) => {
+
+    if (err) {
+      res.send(err)
+    }
+
+    Shop.findById(req.params.id, (err, shop) => {
+      if (err) {
+        res.send(err)
+      }
+      shop.products.push(product);
+      shop.save((err) => {
+        if (err) {
+          res.send(err);
+        }
+        res.status(200).json(shop);
+      });
+    })
+  })
+}
+
+exports.ShowAllProductsOfShop = (req, res) => {
+
+  Shop.findById(req.params.id, (err, shop) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(shop.products);
+  })
+}
