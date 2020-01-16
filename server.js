@@ -23,11 +23,9 @@ app.use(function (req, res, next) {
 //routes
 const index = require('./app/routes/index');
 const products = require('./app/routes/product.routes');
-const shop = require('./app/routes/shop.routes')
 
 app.use('/', index)
 app.use('/products', products)
-app.use('/shop', shop)
 
 //server
 const PORT = process.env.PORT || 3000;

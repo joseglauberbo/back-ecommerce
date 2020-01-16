@@ -21,7 +21,9 @@ exports.showProduct = (req, res) => {
 };
 
 exports.newProduct = (req, res) => {
+
   var newProduct = new Product(req.body);
+
   newProduct.save({})
     .then((result) => {
       res.status(200).json(result);
