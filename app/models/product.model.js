@@ -14,8 +14,8 @@ var ProductSchema = new Schema({
     type: Number,
     required: true
   },
-  hasPromotion: {
-    type: String
+  promotion: {
+    type: Number
   }
 });
 

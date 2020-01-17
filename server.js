@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 var http = require('http');
 var server = http.createServer(app);
+var localstorage = require('./app/controllers/shop.controller');
 
 var options = {
   app: { socketOptios: { keepAlive: 1, connectTimeoutMS: 30000 } },
@@ -23,9 +24,11 @@ app.use(function (req, res, next) {
 //routes
 const index = require('./app/routes/index');
 const products = require('./app/routes/product.routes');
+const shop = require('./app/routes/shop.routes');
 
 app.use('/', index)
 app.use('/products', products)
+app.use('/shop', shop)
 
 //server
 const PORT = process.env.PORT || 3000;
