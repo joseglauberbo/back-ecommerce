@@ -1,28 +1,34 @@
-var Sistema = require("../service/sistema")
+import PromotionsManager from '../service/gerenciadorPromocoes'
 
-let qtProdutoAdicionado = 0;
 let arrayOfProducts = [];
-let valorTotal = 0;
-let qtProdutos = 0;
 
 exports.addProductToShop = (req, res) => {
 
-  console.log(req.body)
-  let promotionOfProduct = req.body.hasPromotion;
+  let product = req.body
+  let productPromotion = product.promotion
+  let productPrice = product.price
+
+  const gerenciador = new PromotionsManager()
 
   //logica da promoção p mudar o carrinho => delegate
-
-  arrayOfProducts.push((req.body));
-  res.status(200).send(arrayOfProducts);
-
-}
-
-exports.AddProductsToArray = (req, res) => {
-
+  if (productPromotion != 0) {
+    if (productPromotion == 1) {
+      let obj = gerenciador.pague1Leve2(product)
+      arrayOfProducts.push(obj)
+    } else {
+      let obj = gerenciador.promocao3por10(product)
+      arrayOfProducts.push(obj)
+    }
+  } else {
+    productPrice = product.qt * productPrice
+    var obj = { qt: product.qt, id: product.id, name: product.name, price: productPrice, promotion: product.promotion }
+    arrayOfProducts.push(obj);
+  }
 }
 
 exports.getAllProducts = (req, res) => {
-  console.log(arrayOfProducts);
   res.status(200).send(arrayOfProducts);
 }
+
+
 

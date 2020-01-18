@@ -4,20 +4,24 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r esm server.js"
   },
+  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-error-handler": "^1.1.0",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
     "hbs": "^4.0.6",
     "localStorage": "^1.0.4",
+    "milsymbol": "^2.0.0",
     "mongoose": "^5.8.7",
     "node-localstorage": "^2.1.5"
   }
