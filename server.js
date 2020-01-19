@@ -6,13 +6,15 @@ var http = require('http');
 var server = http.createServer(app);
 var localstorage = require('./app/controllers/shop.controller');
 
+require('dotenv').config()
+
 var options = {
   app: { socketOptios: { keepAlive: 1, connectTimeoutMS: 30000 } },
   replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }
 };
 
 //using mongo
-mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/siteware');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
