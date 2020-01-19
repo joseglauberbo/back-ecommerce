@@ -16,6 +16,7 @@ var options = {
 //using mongo
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/siteware');
 
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
@@ -35,6 +36,7 @@ app.use('/shop', shop)
 //server
 const port = process.env.PORT || 3000;
 app.listen(port);
+
 
 
 module.exports = app;

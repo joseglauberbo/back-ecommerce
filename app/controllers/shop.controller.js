@@ -19,22 +19,22 @@ exports.addProductToShop = (req, res) => {
     if (productPromotion == 1) {
       let obj = gerenciador.pague1Leve2(product)
       arrayOfProducts.push(obj)
-      arrAux = []
       let obj2 = this.calculaValorDoCarrinho(arrayOfProducts)
+      arrAux = []
       arrAux.push(obj2)
     } else {
       let obj = gerenciador.promocao3por10(product)
       arrayOfProducts.push(obj)
-      arrAux = []
       let obj2 = this.calculaValorDoCarrinho(arrayOfProducts)
+      arrAux = []
       arrAux.push(obj2)
     }
   } else {
     productPrice = product.qt * productPrice
     var obj = { qt: product.qt, id: product.id, name: product.name, price: productPrice, promotion: product.promotion }
     arrayOfProducts.push(obj);
-    arrAux = []
     let obj2 = this.calculaValorDoCarrinho(arrayOfProducts)
+    arrAux = []
     arrAux.push(obj2)
   }
 }
@@ -43,15 +43,12 @@ exports.calculaValorDoCarrinho = (arrayOfProducts) => {
 
   var obj = {}
 
-  console.log('aqui')
   for (var productIndex = varControle; productIndex < arrayOfProducts.length; productIndex++) {
     totalValue = totalValue + arrayOfProducts[productIndex].price
     varControle = varControle + 1;
   }
 
   obj = { value: totalValue }
-
-  console.log(obj)
 
   return obj
 }

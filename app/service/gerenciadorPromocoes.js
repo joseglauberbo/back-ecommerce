@@ -2,7 +2,7 @@ export default class PromotionsManager {
 
   constructor() { }
 
-  //se o usuário quiser adicionar uma nova promoção é só criar uma função
+  //se o usuário quiser adicionar uma nova promoção é só criar uma nova função
   pague1Leve2(product) {
 
     let productName = product.name
