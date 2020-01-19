@@ -4,6 +4,7 @@ let arrayOfProducts = [];
 let arrAux = [];
 let totalValue = 0;
 let sizeShopCart = 0
+let varControle = 0;
 
 exports.addProductToShop = (req, res) => {
 
@@ -41,9 +42,11 @@ exports.addProductToShop = (req, res) => {
 exports.calculaValorDoCarrinho = (arrayOfProducts) => {
 
   var obj = {}
+
   console.log('aqui')
-  for (var productIndex = 0; productIndex < arrayOfProducts.length; productIndex++) {
+  for (var productIndex = varControle; productIndex < arrayOfProducts.length; productIndex++) {
     totalValue = totalValue + arrayOfProducts[productIndex].price
+    varControle = varControle + 1;
   }
 
   obj = { value: totalValue }
