@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('localhost:3000'. { useMongoClient: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/siteware');
 
 mongoose.connection.on('connected', () => {
   console.log('connected on db');
