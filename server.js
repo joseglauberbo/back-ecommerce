@@ -33,10 +33,8 @@ app.use('/products', products)
 app.use('/shop', shop)
 
 //server
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
-});
+const port = process.env.PORT || 3000;
+app.listen(port);
 
 
 module.exports = app;
