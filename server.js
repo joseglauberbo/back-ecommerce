@@ -2,11 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const mongoose = require('mongoose');
+var cors = require('cors')
 var http = require('http');
 var server = http.createServer(app);
-var localstorage = require('./app/controllers/shop.controller');
 
 require('dotenv').config()
+app.use(cors())
 
 var options = {
   app: { socketOptios: { keepAlive: 1, connectTimeoutMS: 30000 } },
@@ -36,8 +37,6 @@ app.use('/shop', shop)
 //server
 const port = process.env.PORT || 3000;
 app.listen(port);
-
-
 
 module.exports = app;
 
