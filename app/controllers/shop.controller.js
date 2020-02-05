@@ -1,10 +1,9 @@
-import PromotionsManager from '../service/gerenciadorPromocoes'
+var Strategy = require("../service/strategyPromotion")
 
-let arrayOfProducts = [];
-let arrAux = [];
-let totalValue = 0;
-let sizeShopCart = 0
-let varControle = 0;
+var arrayOfProducts = [];
+var arrayWithValue;
+var totalValue = 0;
+var sizeOfShop = 0;
 
 exports.addProductToShop = (req, res) => {
 
@@ -12,45 +11,32 @@ exports.addProductToShop = (req, res) => {
   let productPromotion = product.promotion
   let productPrice = product.price
 
-  const gerenciador = new PromotionsManager()
-
-  //logica da promoção p mudar o carrinho => delegate
+  //using strategy to promotion
   if (productPromotion != 0) {
-    if (productPromotion == 1) {
-      let obj = gerenciador.pague1Leve2(product)
-      arrayOfProducts.push(obj)
-      let obj2 = this.calculaValorDoCarrinho(arrayOfProducts)
-      arrAux = []
-      arrAux.push(obj2)
-    } else {
-      let obj = gerenciador.promocao3por10(product)
-      arrayOfProducts.push(obj)
-      let obj2 = this.calculaValorDoCarrinho(arrayOfProducts)
-      arrAux = []
-      arrAux.push(obj2)
-    }
+    let object = Strategy[productPromotion](product)
+    arrayOfProducts.push(object)
+    arrayWithValue = []
+    arrayWithValue.push(this.calculaValorDoCarrinho(object.price))
   } else {
     productPrice = product.qt * productPrice
-    var obj = { qt: product.qt, id: product.id, name: product.name, price: productPrice, promotion: product.promotion }
-    arrayOfProducts.push(obj);
-    let obj2 = this.calculaValorDoCarrinho(arrayOfProducts)
-    arrAux = []
-    arrAux.push(obj2)
+    let object = { qt: product.qt, id: product.id, name: product.name, price: productPrice, promotion: product.promotion }
+    arrayOfProducts.push(object)
+    arrayWithValue = []
+    arrayWithValue.push(this.calculaValorDoCarrinho(object.price))
   }
 }
 
-exports.calculaValorDoCarrinho = (arrayOfProducts) => {
+exports.calculaValorDoCarrinho = (productPrice) => {
 
-  var obj = {}
+  let objectWithValueAndSize = {}
 
-  for (var productIndex = varControle; productIndex < arrayOfProducts.length; productIndex++) {
-    totalValue = totalValue + arrayOfProducts[productIndex].price
-    varControle = varControle + 1;
-  }
+  totalValue = totalValue + productPrice
+  sizeOfShop = sizeOfShop + 1
 
-  obj = { value: totalValue }
+  objectWithValueAndSize = { value: totalValue, size: sizeOfShop }
 
-  return obj
+  return objectWithValueAndSize
+
 }
 
 exports.getAllProducts = (req, res) => {
@@ -58,7 +44,7 @@ exports.getAllProducts = (req, res) => {
 }
 
 exports.getInfoAboutShopCart = (req, res) => {
-  res.status(200).send(arrAux);
+  res.status(200).send(arrayWithValue);
 }
 
 
