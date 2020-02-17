@@ -15,7 +15,7 @@ var options = {
 };
 
 //using mongo
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/siteware');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ecommerce');
 
 
 app.use(bodyParser.urlencoded({ extended: false }));

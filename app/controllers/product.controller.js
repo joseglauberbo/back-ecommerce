@@ -1,56 +1,21 @@
-var Product = require('../models/product.model');
+var productService = require("../service/product.service")
 
 exports.showAllProducts = (req, res) => {
-  Product.find({})
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+  productService["showAllProducts"](req, res)
 };
 
 exports.showProduct = (req, res) => {
-  Product.findById(req.params.id)
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+  productService["showProduct"](req, res)
 };
 
 exports.newProduct = (req, res) => {
-
-  var newProduct = new Product(req.body);
-
-  newProduct.save({})
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+  productService["newProduct"](req, res)
 };
 
 exports.updateProduct = (req, res) => {
-  const productId = req.params.id;
-  Product.findByIdAndUpdate(productId, req.body)
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+  productService["updateProduct"](req, res)
 };
 
 exports.deleteProduct = (req, res) => {
-  const productId = req.params.id;
-  Product.findByIdAndDelete(productId, req.body)
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+  productService["deleteProduct"](req, res)
 };

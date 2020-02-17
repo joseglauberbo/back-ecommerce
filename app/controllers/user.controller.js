@@ -1,58 +1,21 @@
-var User = require('../models/user.model');
+var userService = require('../service/user.service');
 
 exports.showAllUsers = (req, res) => {
-  User.find({})
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+  userService["showAllUsers"](req, res)
 };
 
 exports.showUser = (req, res) => {
-  User.findById(req.params.id)
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+  userService["showUser"](req, res)
 };
 
-exports.getUserByEmail = (email) => {
-  return User.findOne({ 'email': email });
-}
-
 exports.newUser = (req, res) => {
-  var newUser = new User(req.body);
-  newUser.save({})
-    .then((result) => {
-      res.status(400).json("User not created");
-    })
-    .catch((error) => {
-      res.status(201).json("User created");
-    })
+  userService["newUser"](req, res)
 };
 
 exports.updateUser = (req, res) => {
-  const userId = req.params.id;
-  User.findByIdAndUpdate(userId, req.body)
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+  userService["updateUser"](req, res)
 };
 
 exports.deleteUser = (req, res) => {
-  const userId = req.params.id;
-  User.findByIdAndDelete(userId, req.body)
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    })
+  userService["deleteUser"](req, res)
 };

@@ -1,4 +1,3 @@
-
 var productName;
 var productId;
 var productPrice;
@@ -21,7 +20,6 @@ function pague1Leve2(product) {
     productPrice = productQt * productPrice
     var obj = { qt: productQt, id: productId, name: productName, price: productPrice, promotion: productPromotion }
   }
-
   return obj
 }
 
